@@ -39,7 +39,12 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
                         dir("00-vpc") {
-                            sh "terraform plan"
+                            sh """
+
+                            terraform init
+                            terraform plan
+
+                            """
                         }
                     }
                 }
