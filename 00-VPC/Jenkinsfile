@@ -23,8 +23,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                       dir("INFRA/00-vpc") {
-                           sh "terraform init -reconfigure"
+                       sh """
+                            cd 00-vpc
+                            terraform init -reconfigure
+                          """
                        }
                    }
                }
@@ -34,8 +36,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        dir("00-vpc") {
-                            sh "terraform plan"
+                        sh """
+                            cd 00-vpc
+                            terraform plan
+                          """
                         }
                     }
                 }
