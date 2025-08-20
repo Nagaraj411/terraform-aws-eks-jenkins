@@ -54,10 +54,9 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        sh """
-                            cd 00-vpc
-                            terraform apply -auto-approve
-                        """
+                        dir("00-vpc") {
+                            sh "terraform apply -auto-approve"
+                        }
                     }
                 }
             }
