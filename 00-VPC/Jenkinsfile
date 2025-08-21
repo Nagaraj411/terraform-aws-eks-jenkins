@@ -26,9 +26,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        dir("INFRA/00-VPC") {
-                            sh "terraform init -reconfigure"
-                        }
+                        sh """
+                            cd 00-vpc
+                            terraform init -reconfigure
+                        """
                     }
                 }
             }
@@ -38,13 +39,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        dir("INFRA/00-VPC") {
-                            sh """
-
-                            terraform init
+                        sh """
+                            cd 00-vpc
                             terraform plan
-
-                            """
+                        """
                         }
                     }
                 }
@@ -59,9 +57,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-                        dir("00-vpc") {
-                            sh "terraform apply -auto-approve"
-                        }
+                        sh """
+                            cd 00-vpc
+                            terraform apply -auto-approve
+                        """
                     }
                 }
             }
