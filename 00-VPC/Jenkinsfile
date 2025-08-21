@@ -47,7 +47,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage('apply') {
             input {
                 message "Should we continue?"
@@ -90,3 +89,4 @@ pipeline {
             echo 'Hello Failure'
         }
     }
+}
