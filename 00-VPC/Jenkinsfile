@@ -69,7 +69,7 @@ pipeline {
                 script {
                     build job: '10-sg', 
                       propagate: false,  // even SG fails VPC will not be effected
-                      wait: true // VPC will not wait for SG pipeline completion
+                      wait: false // VPC will not wait for SG pipeline completion
                 }
             }
         }
